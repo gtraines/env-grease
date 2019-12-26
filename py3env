@@ -1,0 +1,22 @@
+#! /usr/bin/env bash
+
+PY3_ENV_NAME="base"
+
+echo "================================="
+echo "= MAKE SURE YOU RAN WITH SOURCE ="
+echo "================================="
+
+ARGS_NUMBER=${#}
+if [[ ${ARGS_NUMBER} -gt 0 ]]; then 
+  PY3_ENV_NAME=${1}
+fi
+
+export PATH=${PATH}:/home/graham/anaconda3/bin
+export PYTHONPATH=/home/graham/anaconda3/lib/python3.6/site-packages
+source /home/graham/anaconda3/bin/activate ${PY3_ENV_NAME}
+ACTIVATION_SUCCESS=${?}
+
+if [[ (${ACTIVATION_SUCCESS} -eq 0) && (${ARGS_NUMBER} -gt 0) ]]; then
+	unset PYTHONPATH
+	export PYTHONPATH=/home/graham/anaconda3/envs/${PY3_ENV_NAME}/lib/python3.6/site-packages
+fi
